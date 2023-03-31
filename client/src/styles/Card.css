@@ -1,0 +1,80 @@
+.containerClosed {
+    background: rgb(95,33,251);
+    background: linear-gradient(190deg, rgba(95,33,251,1) 0%, rgba(119,65,255,1) 100%);
+    width: 380px;
+    height: 300px;
+    margin:30px;
+    margin-top:100px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    padding:30px;
+    transition: height 0.5s;
+}
+
+.containerOpened {
+    background: rgb(255, 255, 255);
+    width: 380px;
+    height: 500px;
+    margin:30px;
+    margin-top:100px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    padding:30px;
+    transition: height 0.5s;
+}
+
+
+.titleClose {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleOpen {
+    text-align: center;
+}
+
+.text {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.Openbutton {
+    background: #fff;
+    color: #000;
+    border: none;
+    height:50px;
+    width:100px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    overflow: auto;
+}
+
+.CloseButton {
+    background: rgb(95,33,251);
+    color: #ffffff;
+    border: none;
+    height:50px;
+    width:100px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    overflow: auto;
+}
+
