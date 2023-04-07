@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.7;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.9.0;
 
 // Importer smart contract general.col
 
@@ -11,12 +11,12 @@ contract validation{
     address public owner;
     string public name = 'Validation';
 
-    constructor() public{
+    constructor() public {
         owner = msg.sender;
     }
 
     modifier restricted(){ //True only if msg.sender is the owner
-        if(owner == msg.sender) _;  // "_" means : "continue with the function"
+         if(owner == msg.sender) _;  // "_" means : "continue with the function"
     }
 
     struct document {
@@ -34,7 +34,6 @@ contract validation{
     mapping(bytes32=>document) public HashToDoc;
 
 // At the beggining of the global contract : validate = false
-
 
     //Return true if msg.sender is a validator, if not return false **
     function isReviewer(bytes32 hash_) public view returns(bool){ //True only if msg.sender is the owner
