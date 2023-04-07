@@ -1,5 +1,5 @@
 .body {
-    background: rgb(2,0,36);
+    background: rgb(255, 255, 255);
     height:1000px;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
 }
 
 .welcome {
-    color: white;
+    color: rgb(37, 37, 37);
     font-size: 30px;
     font-weight: bold;
     margin:30px;
