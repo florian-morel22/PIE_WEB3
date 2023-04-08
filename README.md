@@ -10,14 +10,23 @@ Le code Solidity permet de mettre en place un smart contract. Le smart contract 
 
 Lors de la création d'un document, on renseigne une liste de validateurs en renseignant leurs adresses.
 
-- Un validateur peut valider un document. 
+- Un validateur peut valider un document. S'il n'est pas validateur ou s'il a déjà validé le document, il ne peut pas valider ce dernier.
 
 
+---
 
 Liste des mapping :
 
-| Mapping          |       clé           |           Valeur     |
-| :--------------- |:-------------------:| --------------------:|
-| DocToReviewers   | hash du document    |  Liste des reviewers |
-| DocToValidate    | hash du document    |   Liste des validateurs ayant validé |
-| HashToDoc  | hash du document              |    Document |
+| Mapping          |       clé           |           Valeur                      |
+| :--------------- |:-------------------:| -------------------------------------:|
+| DocToReviewers   | hash du document    |  Liste des reviewers                  |
+| DocToValidate    | hash du document    |   Liste des validateurs ayant validé  |
+| HashToDoc        | hash du document    |    Document                           |
+
+---
+
+## A faire :
+
+- Prendre un compte un changement d'avis des validateurs
+- Prendre en compte une note des validateurs (une grille d'évaluation ?)
+- Intégration et dialogue avec le front end

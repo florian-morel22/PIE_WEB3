@@ -7,8 +7,11 @@ module.exports = {
       gas: 5000000
     }
   },
+  //contract_directory:'./contracts/',
+  //contracts_build_directory: './build',
   compilers: {
     solc: {
+      version: '^0.8.19',
       settings: {
         optimizer: {
           enabled: true, // Default: false
