@@ -1,6 +1,9 @@
-//Test
-const Validation = artifacts.require("./Validations")
+const ValidationContract = artifacts.require('validation');
 
-writeContracts("Validation", accounts =>{
-    
-})
+contract('validation', ()=>{
+    it('Should deply smart contract', async ()=>{
+        const validationContract = await ValidationContract.deployed();
+        console.log(validationContract.address);
+        assert(validationContract.address !==  '');
+    });
+});
