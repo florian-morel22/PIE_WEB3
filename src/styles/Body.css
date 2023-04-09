@@ -14,11 +14,37 @@
 }
 
 .welcome {
-    color: rgb(37, 37, 37);
+    display: flex;
+    flex-direction: column;
+    color: rgb(255, 255, 255);
+    background-color:#0f0e13;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
     font-size: 30px;
+    height: 300px;
     font-weight: bold;
-    margin:30px;
+    margin:0px;
+    text-align: center;
+    
+}
 
+
+
+.text {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: lighter;
+    margin:10px;
+    text-align: center;
+}
+
+.text2 {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: lighter;
+    margin:10px;
     text-align: center;
 }
 
@@ -26,4 +52,23 @@
     .cards {
         flex-direction: column;
     }
+}
+
+.button_click {
+    align-self: center;
+    color: rgb(255, 255, 255);
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    background-color: #5F21FB;
+    padding: 5px;
+    border-radius: 999px; /* use a large value for a rounded shape */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    max-width: 500px;
+}
+  
+.button_click:hover {
+background-color: #a2b8ff;
 }

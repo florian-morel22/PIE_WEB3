@@ -4,6 +4,10 @@ import "../styles/Body.css";
 import Card from "./Card";
 
 const Body = () => {
+    const connetWallet = ()=>{
+
+    }
+
     const [CardOpen, setCardOpen] = React.useState({
         uploadCard: false,
         checkCard: false,
@@ -20,7 +24,15 @@ const Body = () => {
     return (
         <div className="body">
             <div className="welcome">
-                Bienvenue sur le site qui révolutionnera le monde scientifique
+                
+                    <h4>WEB3 PIE, La solution dont vous avez besoin</h4>
+                    <p className="text">Vérification sure de documents scientifiques.</p>
+                    <p className="text">ebvkh.</p>
+
+                    <button type="button" onClick={connetWallet} className="button_click">
+                        <p className="text2">Connect to Wallet</p>
+                    </button>
+
             </div>
 
             <div className="cards">
