@@ -12,8 +12,9 @@
 
 .header-home-container{
     position: relative;
-    height: 200px;
-    background-color: #03144cff;
+    height: 250px;
+    background: rgb(3,20,76);
+    background: linear-gradient(0deg, rgba(3,20,76,1) 0%, rgba(245,245,245,1) 100%);
 
     display: flex;
     flex-direction: column;
@@ -25,7 +26,7 @@
     width : 100%;
     height: 100px;
     position: absolute;
-    top: 200px;
+    top: 250px;
     left: 0px;
     right: 0px;
 }
