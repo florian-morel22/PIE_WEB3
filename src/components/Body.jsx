@@ -2,6 +2,7 @@ import React from "react";
 
 import "../styles/Body.css";
 import Card from "./Card";
+import ConnectionMetaMask from "./ConnectionMetaMask";
 
 const Body = () => {
     const [CardOpen, setCardOpen] = React.useState({
@@ -35,6 +36,7 @@ const Body = () => {
                     title="Check"
                 />
             </div>
+            <ConnectionMetaMask />
         </div>
     );
 };

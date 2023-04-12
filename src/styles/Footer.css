@@ -1,0 +1,15 @@
+.footer-container{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: #03144cff;
+}
+
+.footer-background{
+    width: 100%;
+    height: 100px;
+    transform: rotate(180deg);
+
+    position: absolute;
+    top: -100px;
+}
