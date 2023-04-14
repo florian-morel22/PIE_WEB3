@@ -1,0 +1,11 @@
+.connectionMetamask-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    background: rgb(2,0,36);
+    color : red;
+    border-top: 2px solid #fff;
+}
