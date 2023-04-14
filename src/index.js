@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/index.css';
-import App from './components/Home';
+
 
 import ReactDOM from "react-dom/client";
 import {
@@ -10,6 +10,7 @@ import {
 
 import Home from "./components/Home";
 import Sign_ from "./components/Sign_";
+import Publication from './components/Publication';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     path: "/signin",
     element: <Sign_/>
   },
+  {
+    path: "/publication",
+    element: <Publication/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

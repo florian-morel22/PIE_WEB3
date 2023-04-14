@@ -5,6 +5,8 @@ import Footer from "../Footer";
 import HeaderHome from "./HeaderHome";
 import "./homeStyles.css";
 
+import { Link } from "react-router-dom";
+
 import icon_research from "../../assets/icon_research.png";
 
 function Home() {
@@ -21,7 +23,9 @@ function Home() {
                             Importez votre publication du pdf et attendez que
                             d’autres chercheurs le valident !
                         </p>
-                        <button>Publier</button>
+                        <Link to="/publication" className="home-actions-button">
+                            Publier
+                        </Link>
                     </div>
                     <div className="home-right">
                         <h2>Vérifier un article</h2>
