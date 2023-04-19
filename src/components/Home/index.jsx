@@ -4,12 +4,15 @@ import Banner from "../Banner";
 import Footer from "../Footer";
 import HeaderHome from "./HeaderHome";
 import "./homeStyles.css";
+import ConnectionMetamask from "../ConnectionMetaMask";
 
 import { Link } from "react-router-dom";
 
 import icon_research from "../../assets/icon_research.png";
 
 function Home() {
+
+
     return (
         <div className="home-container">
             <Banner />
@@ -43,6 +46,8 @@ function Home() {
                                 {" "}
                                 <img src={icon_research} alt="icon research" />
                             </button>
+
+
                         </div>
                     </div>
                 </div>

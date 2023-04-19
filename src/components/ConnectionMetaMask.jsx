@@ -4,6 +4,7 @@ import "../styles/ConnectionMetaMask.css";
 import Web3 from "web3";
 
 const ConnectionMetamask = () => {
+
     async function loadWeb3() {
         if (window.ethereum) {
             window.web3 = new Web3(window.ethereum);
@@ -24,19 +25,26 @@ const ConnectionMetamask = () => {
     async function loadBlockchainData() {
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
-        console.log(accounts);
+        console.log("ACCOUNT :",accounts[0]);
         const networkId = await web3.eth.net.getId();
-        console.log(networkId);
+        console.log("Network ID :",networkId);
         const networkData = await web3.eth.net.getNetworkType();
-        console.log(networkData);
+        console.log("Network Data :",networkData);
         const balance = await web3.eth.getBalance(accounts[0]);
-        console.log(balance);
+        console.log("Balances :",balance);
         const blockNumber = await web3.eth.getBlockNumber();
-        console.log(blockNumber);
+        console.log("Block Number :",blockNumber);
         const block = await web3.eth.getBlock(blockNumber);
-        console.log(block);
+        console.log("Block :",block);
     }
 
+    async function LoadAccount(){
+        const web3 = window.web3;
+        const accounts = await web3.eth.getAccounts();
+        return accounts[0];
+    }
+
+    
     return (
         <div className="connectionMetamask-container">
             <button
@@ -44,7 +52,7 @@ const ConnectionMetamask = () => {
                     await loadWeb3();
                     await loadBlockchainData();
                 }}
-            >
+                >
                 Connection to MetaMask
             </button>
         </div>

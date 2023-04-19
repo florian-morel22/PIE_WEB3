@@ -29,7 +29,7 @@
 }
 
 .banner-nav-links {
-    margin-left: auto;
+    margin-left: 40px;
     gap: 50px;
 
     display: flex;
@@ -72,3 +72,11 @@
     width: 20px;
     height: 20px;
 }
+
+.banner-meta{
+    margin-left: auto;
+    
+}
+.nobull {
+    list-style-type: none;
+   }
