@@ -1,10 +1,19 @@
 import "../styles/Banner.css";
 import ConnectionMetamask from "./ConnectionMetaMask";
 import icon_signin from "../assets/icon_signin.png";
+import MyContext from "../Context";
+import React from "react";
 
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 const Banner = () => {
+    const [ContextData, setContext] = React.useState({
+        address: null,
+        subject: null,
+        date: null
+      });
+
     return (
         
         <nav className="banner">
@@ -21,7 +30,8 @@ const Banner = () => {
                 <ConnectionMetamask/>
             </div>
 
-            <span>Account Number : </span>
+            <button onClick={console.log("Address log : ", ContextData.address)}></button>
+            <span>Account Number : {ContextData.address} </span>
             <Link to="/signin" className="banner-signin">
                 <img
                     src={icon_signin}

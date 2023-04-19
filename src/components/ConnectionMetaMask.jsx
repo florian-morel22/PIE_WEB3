@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import "../styles/ConnectionMetaMask.css";
+import MyContext from "../Context";
 
 import Web3 from "web3";
 
 const ConnectionMetamask = () => {
+    const [ContextData, setContext] = React.useState({
+        address: null,
+        subject: null,
+        date: null
+      });
+
 
     async function loadWeb3() {
         if (window.ethereum) {
@@ -26,6 +33,9 @@ const ConnectionMetamask = () => {
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
         console.log("ACCOUNT :",accounts[0]);
+        setContext({...ContextData, address:accounts[0]});
+        console.log("Data Address : ",ContextData.address)
+        //ModifyAddress(accounts[0]);
         const networkId = await web3.eth.net.getId();
         console.log("Network ID :",networkId);
         const networkData = await web3.eth.net.getNetworkType();
@@ -44,7 +54,7 @@ const ConnectionMetamask = () => {
         return accounts[0];
     }
 
-    
+
     return (
         <div className="connectionMetamask-container">
             <button

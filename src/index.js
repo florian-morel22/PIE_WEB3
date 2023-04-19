@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { createContext, useContext } from 'react';
 import './styles/index.css';
+import MyContext from './Context';
 
 import ReactDOM from "react-dom/client";
 import {
@@ -10,6 +11,7 @@ import {
 import Home from "./components/Home";
 import Sign_ from "./components/Sign_";
 import Publication from './components/Publication';
+
 
 const router = createBrowserRouter([
   {
@@ -27,10 +29,23 @@ const router = createBrowserRouter([
 ]);
 
 
+const App = ()=>{
+  const [ContextData, setContext] = React.useState({
+    address: null,
+    subject: null,
+    date: null
+  });
+
+  return(
+  <MyContext.Provider value={{ContextData, setContext}}>
+    <RouterProvider router={router} />
+  </MyContext.Provider>);
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App/>
   </React.StrictMode>
 );
