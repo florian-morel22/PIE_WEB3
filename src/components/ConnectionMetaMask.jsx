@@ -1,21 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "../styles/ConnectionMetaMask.css";
 import MyContext from "../Context";
 
 import Web3 from "web3";
 
 const ConnectionMetamask = () => {
-    const [ContextData, setContext] = React.useState({
-        address: null,
-        subject: null,
-        date: null
-      });
-
+    const {ContextData, setContextData} = React.useContext(MyContext);
 
     async function loadWeb3() {
         if (window.ethereum) {
             window.web3 = new Web3(window.ethereum);
             try {
+                //await window.eth_requestAccounts;
                 await window.ethereum.enable();
             } catch (error) {
                 console.log("error in connection to metamask");
@@ -32,20 +28,19 @@ const ConnectionMetamask = () => {
     async function loadBlockchainData() {
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
-        console.log("ACCOUNT :",accounts[0]);
-        setContext({...ContextData, address:accounts[0]});
-        console.log("Data Address : ",ContextData.address)
-        //ModifyAddress(accounts[0]);
-        const networkId = await web3.eth.net.getId();
-        console.log("Network ID :",networkId);
-        const networkData = await web3.eth.net.getNetworkType();
-        console.log("Network Data :",networkData);
-        const balance = await web3.eth.getBalance(accounts[0]);
-        console.log("Balances :",balance);
-        const blockNumber = await web3.eth.getBlockNumber();
-        console.log("Block Number :",blockNumber);
-        const block = await web3.eth.getBlock(blockNumber);
-        console.log("Block :",block);
+        // console.log("ACCOUNT :",accounts[0]);
+        setContextData({...ContextData, address:accounts[0]})
+        // const networkId = await web3.eth.net.getId();
+        // console.log("Network ID :",networkId);
+        // const networkData = await web3.eth.net.getNetworkType();
+        // console.log("Network Data :",networkData);
+        // const balance = await web3.eth.getBalance(accounts[0]);
+        // console.log("Balances :",balance);
+        // const blockNumber = await web3.eth.getBlockNumber();
+        // console.log("Block Number :",blockNumber);
+        // const block = await web3.eth.getBlock(blockNumber);
+        // console.log("Block :",block);
+
     }
 
     async function LoadAccount(){
@@ -68,5 +63,7 @@ const ConnectionMetamask = () => {
         </div>
     );
 };
+
+
 
 export default ConnectionMetamask;

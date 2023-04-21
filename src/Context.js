@@ -1,10 +1,12 @@
-import React, { createContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const MyContext = React.createContext({
-    address:null,
-    subject: null,
-    date: null
-});
+// export const MyContext = React.createContext({
+//     address:'0x0',
+//     subject: null,
+//     date: null
+// });
+
+export const MyContext = React.createContext(null);
 
 
 export default MyContext

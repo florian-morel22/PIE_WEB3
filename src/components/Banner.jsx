@@ -8,11 +8,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 const Banner = () => {
-    const [ContextData, setContext] = React.useState({
-        address: null,
-        subject: null,
-        date: null
-      });
+    const {ContextData, setContextData} = React.useContext(MyContext);
 
     return (
         
@@ -29,8 +25,7 @@ const Banner = () => {
             <div className="banner-meta">
                 <ConnectionMetamask/>
             </div>
-
-            <button onClick={console.log("Address log : ", ContextData.address)}></button>
+            
             <span>Account Number : {ContextData.address} </span>
             <Link to="/signin" className="banner-signin">
                 <img

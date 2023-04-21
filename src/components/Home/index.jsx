@@ -1,5 +1,5 @@
 import React from "react";
-
+import MyContext from "../../Context";
 import Banner from "../Banner";
 import Footer from "../Footer";
 import HeaderHome from "./HeaderHome";
@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import icon_research from "../../assets/icon_research.png";
 
 function Home() {
-
 
     return (
         <div className="home-container">

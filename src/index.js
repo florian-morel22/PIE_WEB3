@@ -30,15 +30,11 @@ const router = createBrowserRouter([
 
 
 const App = ()=>{
-  const [ContextData, setContext] = React.useState({
-    address: null,
-    subject: null,
-    date: null
-  });
+  const [ContextData, setContextData] = React.useState({address:null, text:null});
 
   return(
-  <MyContext.Provider value={{ContextData, setContext}}>
-    <RouterProvider router={router} />
+  <MyContext.Provider value={{ContextData, setContextData}}>
+      <RouterProvider router={router} />
   </MyContext.Provider>);
 }
 
