@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 100vw;
     min-height: 100vh;
+    position: relative;
 }
 
 .publication-body{
@@ -10,6 +11,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    background-color: #f5f5f5;
 }
 
 .publication-body > h2{
@@ -35,8 +38,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
     width: 100%;
-    height: 100%;
+    margin-bottom: 130px;
 }
 
 .pub-form-container > form{
@@ -45,7 +49,10 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 1000px;
     height: 100%;
+    padding: 0px 100px;
+    gap: 20px;
 }
 
 .pub-form-container > form > label{
@@ -58,15 +65,120 @@
 }
 
 .pub-form-container > form > label > input{
-    width: 300px;
+    width: 100%;
     height: 50px;
     margin: 10px 0px;
     padding: 0px 10px;
     border: none;
-    border: 2px solid #f5f5f5;
+    border: 2px solid rgb(3,20,76);
     border-radius: 5px;
     background-color: transparent;
     font-size: 20px;
     font-weight: 700;
     font-family: 'Archivo Narrow', sans-serif;
+}
+
+.pub-form-container > form > label > input::placeholder{
+    color: #c3b9b9;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+.pub-form-container > form > label > textarea{
+    width: 100%;
+    height: 200px;
+    margin: 10px 0px;
+    padding: 0px 10px;
+    border: none;
+    border: 2px solid rgb(3,20,76);
+    border-radius: 5px;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Archivo Narrow', sans-serif;
+
+    padding: 10px;
+    resize: vertical;
+}
+
+.pub-form-submit{
+    width: 200px;
+    height: 40px;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 20px;
+
+    background-color: #03144cff;
+    color: #f5f5f5;
+
+    margin-top: 30px;
+
+    cursor: pointer;
+}
+
+.publi-form-file-uploader{
+background-color: #03144cff;
+}
+
+/* ------------------ MODAL ----------------*/
+
+.modalPub-layer{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.33);
+
+    position: absolute;
+}
+
+.modalPub-container{
+    width: 400px;
+    height: 230px;
+    position: fixed;
+    top: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #f5f5f5;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    gap: 20px;
+
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.modalPub-container > span{
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Archivo Narrow', sans-serif;
+    text-align: center;
+}
+
+.modalPub-link{
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+    border: none;
+
+    font-size: 20px;
+
+    background-color: #03144cff;
+    color: #f5f5f5;
+
+    cursor: pointer;
+
+    text-decoration: none;
 }
