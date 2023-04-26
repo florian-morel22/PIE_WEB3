@@ -80,6 +80,10 @@ const docSchema = new mongoose.Schema({
         filename: String,
         path: String,
         contentType: String
+    },
+    hash: {
+      type: String,
+      required: true,
     }
 });
 
@@ -89,30 +93,35 @@ const Document = mongoose.model('Document', docSchema);
 
 // Define routes
 app.post('/login', async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ email });
-      if (!user) {
-        return res.status(400).json({ error: 'Invalid credentials' });
-      }
-      const password_hash = crypto.createHash('sha256').update(password).digest('hex');
-      if (user.password !== password_hash) {
-        return res.status(400).json({ error: 'Invalid credentials' });
-      }
-
-      // Generate a token / session ID and return it to the client
-      const payload = { name: user.name, email: user.email };
-      const token = jwt.sign(payload, JWT_SECRET, {expiresIn: '1h'});
-      res.json({ token: token });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Server error' });
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid credentials' });
     }
+    const password_hash = crypto.createHash('sha256').update(password).digest('hex');
+    if (user.password !== password_hash) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate a token / session ID and return it to the client
+    const payload = { name: user.name, email: user.email };
+    const token = jwt.sign(payload, JWT_SECRET, {expiresIn: '1h'});
+    res.json({ token: token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 app.post('/signup', async (req, res) => {
     try {
       let { firstname, lastname, email, password } = req.body;
+      
+      const user_email = await User.findOne({ email });
+      if (user_email)
+        return res.status(400).json({ error: 'A user with this email already exists.' });
+
       password = crypto.createHash('sha256').update(password).digest('hex');
       const user = new User({ firstname, lastname, email, password });
       await user.save();
@@ -124,25 +133,26 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/doc', upload.single('pdf'), async (req, res) => {
-    // req.file contains information about the uploaded file
-    console.log(req.file);
-    const { name, authors, abstract, keywords } = req.body;
-  
-    // Create a new PDF document with the uploaded file data
-    const pdf = {
-      filename: req.file.originalname,
-      contentType: req.file.mimetype,
-      path: req.file.path
-    };
-
-    console.log(name, authors, abstract, keywords);
+    try {
+      // req.file contains information about the uploaded file
+      const { name, authors, abstract, keywords, hash } = req.body;
     
-    const doc = new Document({name, authors, abstract, keywords, pdf});
+      // Create a new PDF document with the uploaded file data
+      const pdf = {
+        filename: req.file.originalname,
+        contentType: req.file.mimetype,
+        path: req.file.path
+      };
+      
+      const doc = new Document({name, authors, abstract, keywords, pdf, hash});
+      
+      // Save the document to the database
+      await doc.save();
 
-    // Save the document to the database
-    await doc.save();
-
-    res.send(`PDF file uploaded and saved successfully: ${doc._id}`);
+      res.status(201).json({ doc });
+    } catch (e) {
+      res.status(500).json({ error: 'Server error' });
+    }
 });
 
 app.get('/doc', async (req, res) => {
@@ -154,7 +164,7 @@ app.get('/doc', async (req, res) => {
     try {
         const documents = await Document.find(keywordsFind).skip((page - 1) * limit).limit(limit);
         const count = await Document.countDocuments();
-        res.send({
+        res.status(201).send({
             documents: documents, 
             currentPage: page,
             totalPages: Math.ceil(count / limit),
