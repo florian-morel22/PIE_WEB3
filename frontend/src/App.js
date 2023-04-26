@@ -16,7 +16,7 @@ import Web3 from "web3";
 function App() {
   let { loggedUser, setLoggedUser } = useSession();
   const [owner, setOwner] = useState({address:''});
-  const [contract, setContract] = useState({address:''});
+  const [contract, setContract] = useState({Data:null,address:''});
   //console.log('owner address : ', owner);
 
   async function loadContract(){
@@ -33,7 +33,8 @@ function App() {
     // Instancier le contrat
     const contract = new web3.eth.Contract(abi, contractAddress);
 
-    setContract({address:contractAddress});
+    setContract({Data:contract,address:contractAddress});
+    
 }
 
 //Se connecter au contrat a chaque generation du composant app

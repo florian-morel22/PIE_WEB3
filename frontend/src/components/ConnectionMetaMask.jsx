@@ -35,6 +35,8 @@ const ConnectionMetamask = () => {
         const networkId = await web3.eth.net.getId();
         const validationData = validation.networks[networkId];
         console.log("CONTRACT ADDRESS : ",contract.address);
+        console.log(contract.Data.methods);
+
     }
 
     return (
