@@ -5,6 +5,7 @@ import Sign from './components/Sign_';
 import Publication from './components/Publication';
 import Validation from './components/Validation';
 import PageArticle from './components/Validation/PageArticle';
+import Team from './components/Team';
 import AuthContext, { useSession } from './hooks/useSession'
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="*" element={loggedUser ? <Home /> : <Sign />} />
         <Route path="validation" element={<Validation />} />
         <Route path="validation/pageArticle" element={<PageArticle />} />
+        <Route path="team" element={<Team />} />
       </Routes>
     </AuthContext.Provider>
   );
