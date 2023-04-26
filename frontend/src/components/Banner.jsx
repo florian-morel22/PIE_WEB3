@@ -19,7 +19,7 @@ const Banner = () => {
 
             <div className="banner-nav-links">
                 <span>Découvrir le projet</span>
-                <span>Découvrir l'équipe</span>
+                <Link to="team">Découvrir l'équipe</Link>
             </div>
             <Link to="signin">
                 <div className="banner-signin" onClick={logout}>
