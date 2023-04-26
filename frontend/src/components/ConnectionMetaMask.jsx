@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/ConnectionMetaMask.css";
+import MetamaskContext from "../hooks/useMetamask";
+import ContractContext from "../hooks/useContract";
+import validation from '../truffle_abis/validation.json';
+
 
 import Web3 from "web3";
 
 const ConnectionMetamask = () => {
+    const {owner, setOwner} = useContext(MetamaskContext);
+    const {contract, setContract} = useContext(ContractContext);
+
     async function loadWeb3() {
         if (window.ethereum) {
             window.web3 = new Web3(window.ethereum);
@@ -24,17 +31,10 @@ const ConnectionMetamask = () => {
     async function loadBlockchainData() {
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
-        console.log(accounts);
+        setOwner({address:accounts[0]});
         const networkId = await web3.eth.net.getId();
-        console.log(networkId);
-        const networkData = await web3.eth.net.getNetworkType();
-        console.log(networkData);
-        const balance = await web3.eth.getBalance(accounts[0]);
-        console.log(balance);
-        const blockNumber = await web3.eth.getBlockNumber();
-        console.log(blockNumber);
-        const block = await web3.eth.getBlock(blockNumber);
-        console.log(block);
+        const validationData = validation.networks[networkId];
+        console.log("CONTRACT ADDRESS : ",contract.address);
     }
 
     return (
