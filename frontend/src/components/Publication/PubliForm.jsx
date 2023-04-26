@@ -3,9 +3,7 @@ import axios from "axios";
 import { ThreeCircles } from "react-loader-spinner";
 import jsSHA from "jssha";
 
-import ModalPub from "./ModalPub";
-
-const fileTypes = ["PDF"];
+import Modal from "../Modal/Modal";
 
 const PubliForm = () => {
     const [showModal, setShowModal] = useState(false);
@@ -76,22 +74,39 @@ const PubliForm = () => {
             nameFileDandD.slice(-4) !== ".pdf"
         ) {
             setShowModal(true);
-            setContentModal("errorInput");
+            setContentModal(
+                <>
+                    {" "}
+                    <span>
+                        Pour publier votre article vous devez renseigner :
+                    </span>
+                    <ul className="modalPub-ul">
+                        <li>Le nom de l'article</li>
+                        <li>L'abstract</li>
+                        <li>le nom d'au moins un auteur</li>
+                        <li>Au moins un mot clé</li>
+                        <li>Le fichier pdf de votre article</li>
+                    </ul>
+                </>
+            );
             setSubmitting(false);
         } else {
-            formData.append("authors", [
-                dataForm.author1,
-                dataForm.author2,
-                dataForm.author3,
-            ]);
-            formData.append("keywords", [
-                dataForm.keyword1,
-                dataForm.keyword2,
-                dataForm.keyword3,
-            ]);
+            let authors = [];
+            if (dataForm.author1) authors.push(dataForm.author1);
+            if (dataForm.author2) authors.push(dataForm.author2);
+            if (dataForm.author3) authors.push(dataForm.author3);
+            formData.append("authors", authors);
+
+            let keywords = [];
+            if (dataForm.keyword1) keywords.push(dataForm.keyword1);
+            if (dataForm.keyword2) keywords.push(dataForm.keyword2);
+            if (dataForm.keyword3) keywords.push(dataForm.keyword3);
+            formData.append("keywords", keywords);
+
             formData.append("name", dataForm.namearticle);
             formData.append("abstract", dataForm.abstract);
             formData.append("pdf", file);
+            formData.append("hash", hashPDF);
 
             console.log("Le hash SHA-256 du document PDF est : ", hashPDF);
             //Ajouter le hash dans le formData
@@ -104,12 +119,19 @@ const PubliForm = () => {
                 );
                 console.log(response);
                 setShowModal(true);
-                setContentModal("validation");
+                setContentModal(
+                    <span>Votre article a été publié avec succès !</span>
+                );
                 setSubmitting(false);
             } catch (e) {
                 console.log(e);
                 setShowModal(true);
-                setContentModal("errorNetwork");
+                setContentModal(
+                    <span>
+                        Une erreur s'est produite. Réessayez de publier votre
+                        article à un autre moment.
+                    </span>
+                );
                 setSubmitting(false);
             }
         }
@@ -232,7 +254,11 @@ const PubliForm = () => {
             </form>
 
             {showModal && (
-                <ModalPub setShowModal={setShowModal} content={contentModal} />
+                <Modal
+                    content={contentModal}
+                    actionButton={() => setShowModal(false)}
+                    buttonName={"Retour"}
+                />
             )}
         </div>
     );

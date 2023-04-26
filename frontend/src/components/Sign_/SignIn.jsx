@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../hooks/useSession";
 import axios from "axios";
 
-const SignIn = () => {
+const SignIn = ({ onError }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { setLoggedUser } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const SignIn = () => {
             );
             setLoggedUser(responseLogin.data.token);
         } catch (e) {
-            console.log("deu pau", e);
+            onError(e);
         }
     };
 

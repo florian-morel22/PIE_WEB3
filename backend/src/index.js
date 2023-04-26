@@ -159,10 +159,24 @@ app.get('/doc', async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Default to page 1 if page is not provided
     const limit = parseInt(req.query.limit) || 10; // Default to limit 10 if limit is not provided
     const keywords = req.query.keywords;
-    const keywordsFind = keywords ? {keywords: { $in: keywords.split(",") }} : {};
+    const authors = req.query.authors;
+    const name = req.query.name;
 
+    let find = {}
+    if (keywords) {
+      find["keywords"] = { $in: keywords.split(",") }
+    }
+    if (authors) {
+      find["authors"] = { $in: authors.split(",") }
+    }
+    if (name) {
+      find["name"] = name;
+    }
+
+    console.log(find)
+    
     try {
-        const documents = await Document.find(keywordsFind).skip((page - 1) * limit).limit(limit);
+        const documents = await Document.find(find).skip((page - 1) * limit).limit(limit);
         const count = await Document.countDocuments();
         res.status(201).send({
             documents: documents, 

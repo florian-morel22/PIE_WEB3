@@ -1,12 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../Banner";
 import Footer from "../../Footer";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+import axios from "axios";
 
 import "./pageArticleStyles.css";
 
-const PageArticle = () => {
+const PageArticle = (props) => {
+    const [pdf, setPdf] = useState(null);
+    const [title, setTitle] = useState("");
+    const [queryParams] = useSearchParams();
+
+    const fetchPdf = async (id) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:5000/doc/pdf/${id}`,
+                {
+                    responseType: "blob",
+                }
+            );
+            const pdfBlob = new Blob([response.data], {
+                type: "application/pdf",
+            });
+            setPdf(URL.createObjectURL(pdfBlob));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchTitle = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/doc/${id}`);
+            setTitle(response.data.name);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        const articleId = queryParams.get("id");
+        fetchPdf(articleId);
+        fetchTitle(articleId);
+    }, []);
+
     const navigate = useNavigate();
     return (
         <div className="pageArticle-container">
@@ -19,11 +57,11 @@ const PageArticle = () => {
                     >
                         Retour
                     </button>
-                    <h2>Titre de l'article</h2>
+                    <h2>{title}</h2>
                 </div>
 
                 <embed
-                    src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+                    src={pdf}
                     width="80%"
                     height="1000px"
                     type="application/pdf"
