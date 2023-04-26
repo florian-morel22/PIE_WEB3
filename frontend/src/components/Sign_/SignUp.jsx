@@ -3,7 +3,7 @@ import axios from "axios";
 import AuthContext from "../../hooks/useSession";
 // import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = ({ onError }) => {
     // const navigate = useNavigate();
     const { setLoggedUser } = useContext(AuthContext);
 
@@ -33,7 +33,7 @@ const SignUp = () => {
             );
             setLoggedUser(responseLogin.data.token);
         } catch (e) {
-            console.log("deu pau", e);
+            onError(e);
         }
     };
 
