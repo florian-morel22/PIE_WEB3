@@ -1,0 +1,16 @@
+.team-container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+}
+
+.team-body{
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #f5f5f5;
+}
