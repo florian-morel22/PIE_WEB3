@@ -9,17 +9,26 @@
 		{
 			"name": "Login",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"flo.flo@flo.fr\",\r\n    \"password\": \"teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:5000/users",
+					"raw": "http://localhost:5000/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"users"
+						"login"
 					]
 				}
 			},
@@ -71,27 +80,43 @@
 						{
 							"key": "pdf",
 							"type": "file",
-							"src": "/C:/Users/lgpic/Downloads/Leonardo's Resume (2).pdf"
+							"src": "/C:/Users/lgpic/Downloads/README.pdf"
 						},
 						{
-							"key": "authors",
-							"value": "[\"Leonardo\", \"Andrezao\"]",
+							"key": "authors[]",
+							"value": "Leonardo",
 							"type": "text"
 						},
 						{
-							"key": "keywords",
-							"value": "[\"Keyword 1\", \"Keyword 2\", \"Keyword 3\"]",
+							"key": "authors[]",
+							"value": "Andrezao",
+							"type": "text"
+						},
+						{
+							"key": "keywords[]",
+							"value": "Keyword 1",
+							"type": "text"
+						},
+						{
+							"key": "keywords[]",
+							"value": "Keyword 2",
 							"type": "text"
 						},
 						{
 							"key": "name",
-							"value": "\"Name of article\"",
+							"value": "Name of article",
 							"type": "text"
 						},
 						{
 							"key": "abstract",
-							"value": "\"Abstract: Lorem ipsum dolor sit amet\"",
+							"value": "Abstract: Lorem ipsum dolor sit amet",
 							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
@@ -115,7 +140,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/doc/6431831fb4d171bd668c098d",
+					"raw": "http://localhost:5000/doc/64396934806a9707aceac235",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -123,7 +148,7 @@
 					"port": "5000",
 					"path": [
 						"doc",
-						"6431831fb4d171bd668c098d"
+						"64396934806a9707aceac235"
 					]
 				}
 			},
@@ -135,7 +160,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/doc/6431831fb4d171bd668c098d",
+					"raw": "http://localhost:5000/doc/?keywords=Keyword 1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -143,7 +168,13 @@
 					"port": "5000",
 					"path": [
 						"doc",
-						"6431831fb4d171bd668c098d"
+						""
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "Keyword 1"
+						}
 					]
 				}
 			},
@@ -155,7 +186,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/doc/6431831fb4d171bd668c098d",
+					"raw": "http://localhost:5000/doc/pdf/64396934806a9707aceac235",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,7 +194,8 @@
 					"port": "5000",
 					"path": [
 						"doc",
-						"6431831fb4d171bd668c098d"
+						"pdf",
+						"64396934806a9707aceac235"
 					]
 				}
 			},

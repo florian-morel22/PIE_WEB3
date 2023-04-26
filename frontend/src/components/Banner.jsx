@@ -21,14 +21,15 @@ const Banner = () => {
                 <span>Découvrir le projet</span>
                 <span>Découvrir l'équipe</span>
             </div>
-
-            <div className="banner-signin" onClick={logout}>
-                <img
-                    src={icon_signin}
-                    alt="icon sign in"
-                    className="banner-icon_signin"
-                />
-            </div>
+            <Link to="signin">
+                <div className="banner-signin" onClick={logout}>
+                    <img
+                        src={icon_signin}
+                        alt="icon sign in"
+                        className="banner-icon_signin"
+                    />
+                </div>
+            </Link>
         </div>
     );
 };

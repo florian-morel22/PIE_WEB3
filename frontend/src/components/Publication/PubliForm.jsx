@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
+import axios from "axios";
+import { ThreeCircles } from "react-loader-spinner";
+import jsSHA from "jssha";
 
 import ModalPub from "./ModalPub";
 
@@ -7,62 +9,231 @@ const fileTypes = ["PDF"];
 
 const PubliForm = () => {
     const [showModal, setShowModal] = useState(false);
+    const [contentModal, setContentModal] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
+    const [file, setFile] = useState(null);
+    const [hashPDF, setHashPDF] = useState("");
+    const [nameFileDandD, setNameFileDandD] = useState(
+        "Insérez ici votre article en format PDF"
+    );
+
+    const [dataForm, setDataForm] = useState({
+        namearticle: "",
+        abstract: "",
+        author1: "",
+        author2: "",
+        author3: "",
+        keyword1: "",
+        keyword2: "",
+        keyword3: "",
+    });
+
+    const calculHashDoc = (file) => {
+        const sha256 = new jsSHA("SHA-256", "ARRAYBUFFER");
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            const fileData = event.target.result;
+
+            // Calculer le hash SHA-256
+            sha256.update(fileData);
+            const hash = sha256.getHash("HEX");
+
+            setHashPDF(hash);
+        };
+
+        reader.readAsArrayBuffer(file[0]);
+    };
+
+    const handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        setDataForm({ ...dataForm, [name]: value });
+    };
+
+    const handleSubmitPub = async (event) => {
+        event.preventDefault();
+
+        setSubmitting(true);
+
+        const formData = new FormData();
+        const config = {
+            headers: {
+                "content-type": "multipart/form-data",
+            },
+        };
+        if (
+            dataForm.author1[1] + dataForm.author2[1] + dataForm.author3[1] ===
+                "" ||
+            dataForm.keyword1[1] +
+                dataForm.keyword2[1] +
+                dataForm.keyword3[1] ===
+                "" ||
+            dataForm.namearticle === "" ||
+            dataForm.abstract === "" ||
+            file === null ||
+            nameFileDandD.slice(-4) !== ".pdf"
+        ) {
+            setShowModal(true);
+            setContentModal("errorInput");
+            setSubmitting(false);
+        } else {
+            formData.append("authors", [
+                dataForm.author1,
+                dataForm.author2,
+                dataForm.author3,
+            ]);
+            formData.append("keywords", [
+                dataForm.keyword1,
+                dataForm.keyword2,
+                dataForm.keyword3,
+            ]);
+            formData.append("name", dataForm.namearticle);
+            formData.append("abstract", dataForm.abstract);
+            formData.append("pdf", file);
+
+            console.log("Le hash SHA-256 du document PDF est : ", hashPDF);
+            //Ajouter le hash dans le formData
+
+            try {
+                const response = await axios.post(
+                    "http://localhost:5000/doc",
+                    formData,
+                    config
+                );
+                console.log(response);
+                setShowModal(true);
+                setContentModal("validation");
+                setSubmitting(false);
+            } catch (e) {
+                console.log(e);
+                setShowModal(true);
+                setContentModal("errorNetwork");
+                setSubmitting(false);
+            }
+        }
+    };
+
+    const updateFile = (event) => {
+        setFile(event.target.files[0]);
+        console.log(event.target.files);
+        calculHashDoc(event.target.files);
+        setNameFileDandD(event.target.files[0].name);
+    };
+
     return (
         <div className="pub-form-container">
-            <form>
+            <form onSubmit={(e) => handleSubmitPub(e)}>
                 <label>
-                    Nom de l'article <input type="text" />
+                    Nom de l'article{" "}
+                    <input
+                        name="namearticle"
+                        type="text"
+                        value={dataForm.namearticle}
+                        onChange={handleInputChange}
+                    />
                 </label>
 
                 <label>
-                    Abstract <textarea type="text" />
+                    Abstract{" "}
+                    <textarea
+                        name="abstract"
+                        type="text"
+                        value={dataForm.abstract}
+                        onChange={handleInputChange}
+                    />
                 </label>
 
                 <label>
                     Auteurs
-                    <input type="text" placeholder="auteur 1" />
-                    <input type="text" placeholder="auteur 2" />
-                    <input type="text" placeholder="auteur 3" />
+                    <input
+                        name="author1"
+                        type="text"
+                        placeholder="auteur 1"
+                        value={dataForm.author1}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        name="author2"
+                        type="text"
+                        placeholder="auteur 2"
+                        value={dataForm.author2}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        name="author3"
+                        type="text"
+                        placeholder="auteur 3"
+                        value={dataForm.author3}
+                        onChange={handleInputChange}
+                    />
                 </label>
 
                 <label>
                     Mot clés
-                    <input type="text" placeholder="mot clé 1" />
-                    <input type="text" placeholder="mot clé 2" />
-                    <input type="text" placeholder="mot clé 2" />
+                    <input
+                        name="keyword1"
+                        type="text"
+                        placeholder="mot clé 1"
+                        value={dataForm.keyword1}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        name="keyword2"
+                        type="text"
+                        placeholder="mot clé 2"
+                        value={dataForm.keyword2}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        name="keyword3"
+                        type="text"
+                        placeholder="mot clé 2"
+                        value={dataForm.keyword3}
+                        onChange={handleInputChange}
+                    />
                 </label>
 
-                <label>
-                    <div className="dragAndDrop">
-                        <FileUploader
-                            /*handleChange={handleChange}*/
-                            className="publi-form-file-uploader"
-                            name="file"
-                            types={fileTypes}
-                            multiple={false}
-                            maxSize={1}
-                            minSize={1}
-                            label="déposez votre publication ici."
-                            onDrop={() => console.log("fichier déposé")}
-                            onTypeError={() =>
-                                console.log("type de fichier non autorisé")
-                            }
-                            dropMessageStyle={{
-                                backgroundColor: "rgb(3, 20, 76)",
-                            }}
-                        />
-                    </div>
+                <label
+                    className="dragAndDrop"
+                    style={{
+                        color:
+                            nameFileDandD ===
+                            "Insérez ici votre article en format PDF"
+                                ? "#03144cff"
+                                : nameFileDandD.slice(-4) === ".pdf"
+                                ? "green"
+                                : "red",
+                    }}
+                >
+                    {nameFileDandD}
+                    <input type="file" onChange={updateFile} />
                 </label>
+
+                {!submitting ? (
+                    <button type="submit" className="pub-form-submit">
+                        Publier
+                    </button>
+                ) : (
+                    <ThreeCircles
+                        height="50"
+                        width="50"
+                        color="#03144C"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="three-circles-rotating"
+                        outerCircleColor=""
+                        innerCircleColor="#722741"
+                        middleCircleColor=""
+                    />
+                )}
             </form>
 
-            <button
-                className="pub-form-submit"
-                onClick={() => setShowModal(true)}
-            >
-                Publier
-            </button>
-
-            {showModal && <ModalPub setShowModal={setShowModal} />}
+            {showModal && (
+                <ModalPub setShowModal={setShowModal} content={contentModal} />
+            )}
         </div>
     );
 };

@@ -20,7 +20,7 @@ function Home() {
                         <h2>Publier un article</h2>
                         <p>
                             Vous voulez sécuriser votre publication en ligne ?
-                            Importez votre publication du pdf et attendez que
+                            Importez votre publication en pdf et attendez que
                             d’autres chercheurs le valident !
                         </p>
                         <Link to="/publication" className="home-actions-button">
@@ -34,16 +34,9 @@ function Home() {
                             et notez-le pour que la communauté scientifique
                             sache si on peut lui faire confiance !
                         </p>
-                        <div className="home-input-check">
-                            <input
-                                type="search"
-                                placeholder="Rentrez un sujet"
-                            ></input>
-                            <button>
-                                {" "}
-                                <img src={icon_research} alt="icon research" />
-                            </button>
-                        </div>
+                        <Link to="/validation" className="home-actions-button">
+                            Accéder aux articles
+                        </Link>
                     </div>
                 </div>
             </div>
