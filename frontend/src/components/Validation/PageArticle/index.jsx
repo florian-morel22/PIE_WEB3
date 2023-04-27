@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../../Banner";
 import Footer from "../../Footer";
+import jsSHA from "jssha";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -12,6 +13,7 @@ const PageArticle = (props) => {
     const [pdf, setPdf] = useState(null);
     const [title, setTitle] = useState("");
     const [queryParams] = useSearchParams();
+    const [hashPDF, setHashPDF] = useState(null);
 
     const fetchPdf = async (id) => {
         try {
@@ -39,14 +41,35 @@ const PageArticle = (props) => {
         }
     };
 
-    useEffect(() => {
+
+    const calculHashDoc = () => {
+        const sha256 = new jsSHA("SHA-256", "ARRAYBUFFER");
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            const fileData = event.target.result;
+
+            // Calculer le hash SHA-256
+            sha256.update(fileData);
+            const hash = sha256.getHash("HEX");
+
+            setHashPDF(hash);
+        };
+
+        reader.readAsArrayBuffer(pdf[0]);
+    };
+
+
+    useEffect( () => {
         const articleId = queryParams.get("id");
-        fetchPdf(articleId);
+        //await fetchPdf(articleId);
         fetchTitle(articleId);
+        //calculHashDoc();
     }, []);
 
     const navigate = useNavigate();
     return (
+        
         <div className="pageArticle-container">
             <Banner />
             <div className="pageArticle-body">
