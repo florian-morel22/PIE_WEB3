@@ -15,7 +15,7 @@ import Web3 from "web3";
 
 function App() {
   let { loggedUser, setLoggedUser } = useSession();
-  const [owner, setOwner] = useState({address:''});
+  const [owner, setOwner] = useState({address:null});
   const [contract, setContract] = useState({Data:null,address:''});
   //console.log('owner address : ', owner);
 
@@ -25,22 +25,27 @@ function App() {
     const web3 = new Web3('http://localhost:7545');
     const networkId = await web3.eth.net.getId();
     const validationData = validation.networks[networkId];
+
     // Adresse du contrat
+
     const contractAddress = validationData.address;
     // ABI (interface du contrat)
     const abi = validation.abi;
 
     // Instancier le contrat
-    const contract = new web3.eth.Contract(abi, contractAddress);
+    const the_contract = new web3.eth.Contract(abi, contractAddress);
+    
 
-    setContract({Data:contract,address:contractAddress});
+    setContract({Data:the_contract,address:contractAddress});
+   console.log("Contract.address 2 : ", contractAddress);
+
     
 }
 
 //Se connecter au contrat a chaque generation du composant app
 useEffect(()=> {
   loadContract();
-});
+},[]);
 
 
 

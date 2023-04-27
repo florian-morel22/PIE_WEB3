@@ -42,6 +42,18 @@
     cursor: pointer;
 }
 
+.banner-metamask{
+    margin-left: 50px;
+    gap: 50px;
+    display: flex;
+    text-decoration: none;
+    color: #03144cff;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 15px;    
+    font-weight: 400;
+    cursor: pointer;
+}
+
 .banner-sign {
     margin-left: 50px;
     display: flex;
