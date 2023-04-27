@@ -12,6 +12,7 @@ const PageArticle = (props) => {
     const [pdf, setPdf] = useState(null);
     const [title, setTitle] = useState("");
     const [queryParams] = useSearchParams();
+    const [hash, setHash] = useState("");
 
     const fetchPdf = async (id) => {
         try {
@@ -34,9 +35,14 @@ const PageArticle = (props) => {
         try {
             const response = await axios.get(`http://localhost:5000/doc/${id}`);
             setTitle(response.data.name);
+            setHash(response.data.hash);
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const validateDoc = () => {
+        console.log("hash : ", hash);
     };
 
     useEffect(() => {
@@ -72,7 +78,10 @@ const PageArticle = (props) => {
                         l'article,
                     </span>
                     <div>
-                        <button style={{ backgroundColor: "green" }}>
+                        <button
+                            onClick={() => validateDoc()}
+                            style={{ backgroundColor: "green" }}
+                        >
                             J'approuve l'article
                         </button>
                         <button
