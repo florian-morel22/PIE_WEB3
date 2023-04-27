@@ -50,7 +50,7 @@ const Banner = () => {
                 </div>
             )}
 
-            <Link to="signin">
+            <Link to="/signin">
                 <div className="banner-signin" onClick={logout}>
                     <img
                         src={icon_signin}
