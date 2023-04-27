@@ -14,12 +14,14 @@ const Banner = () => {
     return (
         <div className="banner">
             <Link to="/" className="banner-logo">
-                PIE WEB3
+                SCIBLOCK
             </Link>
 
             <div className="banner-nav-links">
                 <span>Découvrir le projet</span>
-                <Link to="team">Découvrir l'équipe</Link>
+                <Link to="team" className="banner-nav-links-team">
+                    Découvrir l'équipe
+                </Link>
             </div>
             <Link to="signin">
                 <div className="banner-signin" onClick={logout}>

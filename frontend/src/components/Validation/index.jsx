@@ -10,58 +10,6 @@ import "./validationStyles.css";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 
-const listArticlesJSON = [
-    {
-        key: 1,
-        title: "Boundary loss for highly unbalanced segmentation",
-        authors: ["Auteur 1", "Auteur 2", "Auteur 3"],
-        keywords: ["Mot clé 1", "Mot clé 2", "Mot clé 3"],
-        abstract: "Abstract de l'article 1",
-        valid: 0,
-        unvalid: 0,
-    },
-    {
-        key: 2,
-        title: "Bounding boxes for weakly supervised segmentation: Global constraints get close to full supervision",
-        authors: ["Auteur 1", "Auteur 2", "Auteur 3"],
-        keywords: ["Mot clé 1", "Mot clé 2", "Mot clé 3"],
-        abstract: "Abstract de l'article 1",
-        valid: 2,
-        unvalid: 0,
-    },
-    {
-        key: 3,
-        title: "Curriculum semi-supervised segmentation",
-        authors: ["Auteur 1", "Auteur 2", "Auteur 3"],
-        keywords: [
-            "Artificial Intelligence",
-            "Digital Manufacturing",
-            "Blockchain",
-        ],
-        abstract: "Abstract de l'article 1",
-        valid: 7,
-        unvalid: 1,
-    },
-    {
-        key: 4,
-        title: "Few-Shot Segmentation Without Meta-Learning: A Good Transductive Inference Is All You Need?",
-        authors: ["H Kervadec", "M Boudiaf", "ZI Masud"],
-        keywords: ["Mot clé 1", "Mot clé 2", "Mot clé 3"],
-        abstract: "Abstract de l'article 1",
-        valid: 1,
-        unvalid: 10,
-    },
-    {
-        key: 5,
-        title: "Beyond pixel-wise supervision: semantic segmentation with higher-order shape descriptors",
-        authors: ["Auteur 1", "Auteur 2", "Auteur 3"],
-        keywords: ["Mot clé 1", "Mot clé 2", "Mot clé 3"],
-        abstract: "Abstract de l'article 1",
-        valid: 1,
-        unvalid: 8,
-    },
-];
-
 function Validation() {
     const [showForm, setShowForm] = useState(false);
     const [documents, setDocuments] = useState([]);
@@ -115,10 +63,7 @@ function Validation() {
             console.log(e);
             setShowModal(true);
             setContentModal(
-                <span>
-                    Une erreur s'est produite. Réessayez de publier votre
-                    article à un autre moment.
-                </span>
+                <span>Une erreur s'est produite. Réessayez plus tard.</span>
             );
         }
     };
@@ -153,15 +98,12 @@ function Validation() {
                             authors: document.authors,
                             keywords: document.keywords,
                             abstract: document.abstract,
-                            valid: Math.floor(Math.random() * 100),
-                            unvalid: Math.floor(Math.random() * 100),
+                            valid: Math.floor(Math.random() * 3),
+                            unvalid: Math.floor(Math.random() * 3),
                         };
 
                         return <Article article={article} key={article.key} />;
                     })}
-                    {/* {listArticlesJSON.map((article) => (
-                        <Article article={article} key={article.key} />
-                    ))} */}
                 </div>
             </div>
             <Footer />

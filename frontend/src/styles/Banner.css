@@ -37,7 +37,18 @@
     text-decoration: none;
     color: #03144cff;
     font-family: 'Archivo Narrow', sans-serif;
-    font-size: 15px;    
+    font-size: 20px;    
+    font-weight: 400;
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+.banner-nav-links-team{
+    text-decoration: none;
+    color: #03144cff;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 20px;    
     font-weight: 400;
     cursor: pointer;
 }
