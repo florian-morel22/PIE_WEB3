@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Banner from "../../Banner";
 import Footer from "../../Footer";
 import jsSHA from "jssha";
@@ -8,12 +8,14 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 import "./pageArticleStyles.css";
+import ContractContext from "../../../hooks/useContract";
 
 const PageArticle = (props) => {
     const [pdf, setPdf] = useState(null);
     const [title, setTitle] = useState("");
     const [queryParams] = useSearchParams();
     const [hashPDF, setHashPDF] = useState("yuv");
+    const {contract, setContract} = useContext(ContractContext);
 
     const fetchPdf = async (id) => {
         try {
@@ -37,7 +39,6 @@ const PageArticle = (props) => {
             const response = await axios.get(`http://localhost:5000/doc/${id}`);
             
             setTitle(response.data.name);
-            setHashPDF(response.data.hash);
             console.log("hash : ", response.data.authors);
         } catch (error) {
             console.error(error);
@@ -48,13 +49,14 @@ const PageArticle = (props) => {
         try {
             const response = await axios.get(`http://localhost:5000/doc/${id}`);
             setHashPDF(response.data.hash);
-            console.log(response.data.hash);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const validateDoc = ()=>{
+    const validateDoc = async ()=>{
+        const name = await contract.Data.name;
+        console.log("name : ", contract.Data.methods.name.call());
         console.log("hash : ", hashPDF);
     }
 
@@ -62,7 +64,7 @@ const PageArticle = (props) => {
         const articleId = queryParams.get("id");
         fetchPdf(articleId);
         fetchTitle(articleId);
-        //fetchHash(articleId);
+        fetchHash(articleId);
     }, []);
 
     const navigate = useNavigate();
