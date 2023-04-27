@@ -36,8 +36,10 @@ const Banner = () => {
             </div>
 
             <div className="banner-nav-links">
-                <span className="banner-nav-link">Découvrir le projet</span>
-                <Link to="team" className="banner-nav-link">
+                <Link to="/project" className="banner-nav-link">
+                    Découvrir le projet
+                </Link>
+                <Link to="/team" className="banner-nav-link">
                     Découvrir l'équipe
                 </Link>
             </div>

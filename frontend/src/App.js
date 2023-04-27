@@ -7,6 +7,7 @@ import Validation from './components/Validation';
 import validation from './truffle_abis/validation.json';
 import PageArticle from './components/Validation/PageArticle';
 import Team from './components/Team';
+import ProjectPage from './components/ProjectPage';
 import AuthContext, { useSession } from './hooks/useSession'
 import MetamaskContext from './hooks/useMetamask';
 import ContractContext from './hooks/useContract';
@@ -61,6 +62,7 @@ useEffect(()=> {
             <Route path="validation" element={<Validation />} />
             <Route path="validation/pageArticle" element={<PageArticle />} />
             <Route path="team" element={<Team />} />
+            <Route path="project" element={<ProjectPage />} />
           </Routes>
         </MetamaskContext.Provider>
       </ContractContext.Provider>
