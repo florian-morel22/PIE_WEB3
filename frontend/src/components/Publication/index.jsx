@@ -3,12 +3,10 @@ import React, { useState } from "react";
 import Banner from "../Banner";
 import Footer from "../Footer";
 import PubliForm from "./PubliForm";
-import ModalPub from "./ModalPub";
 
 import "./publicationStyles.css";
 
 function Publication() {
-    const [showModal, setShowModal] = useState(false);
     return (
         <div className="publication-container">
             <Banner />
@@ -17,8 +15,6 @@ function Publication() {
                 <PubliForm />
             </div>
             <Footer />
-
-            {showModal && <ModalPub />}
         </div>
     );
 }

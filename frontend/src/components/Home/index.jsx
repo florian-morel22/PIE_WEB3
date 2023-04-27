@@ -1,10 +1,9 @@
 import React from "react";
-import MyContext from "../../Context";
+
 import Banner from "../Banner";
 import Footer from "../Footer";
 import HeaderHome from "./HeaderHome";
 import "./homeStyles.css";
-import ConnectionMetamask from "../ConnectionMetaMask";
 
 import { Link } from "react-router-dom";
 

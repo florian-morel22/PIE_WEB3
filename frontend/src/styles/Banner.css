@@ -29,7 +29,7 @@
 }
 
 .banner-nav-links {
-    margin-left: 40px;
+    margin-left: auto;
     gap: 50px;
 
     display: flex;
