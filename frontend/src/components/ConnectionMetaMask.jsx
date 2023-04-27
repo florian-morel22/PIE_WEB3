@@ -36,12 +36,13 @@ const ConnectionMetamask = () => {
         const validationData = validation.networks[networkId];
         console.log("CONTRACT ADDRESS : ",contract.address);
         console.log(contract.Data.methods);
+        console.log("owner address : ",accounts[0]);
 
     }
 
     return (
-        <div className="connectionMetamask-container">
-            <button
+        <div >
+            <button className="Connexion-button"
                 onClick={async () => {
                     await loadWeb3();
                     await loadBlockchainData();
