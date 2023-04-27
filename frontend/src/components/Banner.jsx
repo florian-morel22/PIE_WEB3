@@ -24,12 +24,12 @@ const Banner = () => {
                 <Link to="/" className="banner-logo">
                     SCIBLOCK
                 </Link>
-                <div className="banner-nav-links">
+                <div className="banner-nav-meta">
                     <span>Addresse du contract : {contract.address}</span>
                 </div>
 
                 {owner.address && (
-                    <div className="banner-nav-links">
+                    <div className="banner-nav-meta">
                         <span>Addresse du wallet : {owner.address}</span>
                     </div>
                 )}

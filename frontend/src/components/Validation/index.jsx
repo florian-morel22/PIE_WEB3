@@ -17,6 +17,8 @@ function Validation() {
     const [showModal, setShowModal] = useState(false);
     const [contentModal, setContentModal] = useState("");
 
+    const [hashPDF, setHashPDF] = useState("");
+
     const [dataForm, setDataForm] = useState({
         namearticle: "",
         author1: "",
