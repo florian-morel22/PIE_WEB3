@@ -162,6 +162,7 @@ app.get('/doc', async (req, res) => {
     const authors = req.query.authors;
     const name = req.query.name;
 
+
     let find = {}
     if (keywords) {
       find["keywords"] = { $in: keywords.split(",") }
@@ -204,7 +205,8 @@ app.get('/doc/:id', async (req, res) => {
         authors: document.authors,
         abstract: document.abstract,
         keywords: document.keywords,
-        pdf: document.pdf.filename
+        pdf: document.pdf.filename,
+        hash: document.hash,
     });
 });
 

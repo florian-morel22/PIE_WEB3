@@ -13,7 +13,7 @@ const PageArticle = (props) => {
     const [pdf, setPdf] = useState(null);
     const [title, setTitle] = useState("");
     const [queryParams] = useSearchParams();
-    const [hashPDF, setHashPDF] = useState(null);
+    const [hashPDF, setHashPDF] = useState("yuv");
 
     const fetchPdf = async (id) => {
         try {
@@ -35,36 +35,34 @@ const PageArticle = (props) => {
     const fetchTitle = async (id) => {
         try {
             const response = await axios.get(`http://localhost:5000/doc/${id}`);
+            
             setTitle(response.data.name);
+            setHashPDF(response.data.hash);
+            console.log("hash : ", response.data.authors);
         } catch (error) {
             console.error(error);
         }
     };
 
-
-    const calculHashDoc = () => {
-        const sha256 = new jsSHA("SHA-256", "ARRAYBUFFER");
-        const reader = new FileReader();
-
-        reader.onload = function (event) {
-            const fileData = event.target.result;
-
-            // Calculer le hash SHA-256
-            sha256.update(fileData);
-            const hash = sha256.getHash("HEX");
-
-            setHashPDF(hash);
-        };
-
-        reader.readAsArrayBuffer(pdf[0]);
+    const fetchHash = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/doc/${id}`);
+            setHashPDF(response.data.hash);
+            console.log(response.data.hash);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
+    const validateDoc = ()=>{
+        console.log("hash : ", hashPDF);
+    }
 
     useEffect( () => {
         const articleId = queryParams.get("id");
-        //await fetchPdf(articleId);
+        fetchPdf(articleId);
         fetchTitle(articleId);
-        //calculHashDoc();
+        //fetchHash(articleId);
     }, []);
 
     const navigate = useNavigate();
@@ -95,7 +93,7 @@ const PageArticle = (props) => {
                         l'article,
                     </span>
                     <div>
-                        <button style={{ backgroundColor: "green" }}>
+                        <button style={{ backgroundColor: "green" }} onClick={async()=> validateDoc()}>
                             J'approuve l'article
                         </button>
                         <button
