@@ -36,8 +36,10 @@ const Banner = () => {
             </div>
 
             <div className="banner-nav-links">
-                <span>Découvrir le projet</span>
-                <Link to="team">Découvrir l'équipe</Link>
+                <span className="banner-nav-link">Découvrir le projet</span>
+                <Link to="team" className="banner-nav-link">
+                    Découvrir l'équipe
+                </Link>
             </div>
 
             {!owner.address && (

@@ -95,3 +95,12 @@
     width: 20px;
     height: 20px;
 }
+
+.banner-nav-link{
+    text-decoration: none;
+    color: #03144cff;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 20px;    
+    font-weight: 400;
+    cursor: pointer;
+}
