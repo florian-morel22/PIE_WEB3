@@ -72,6 +72,7 @@ contract validation{
         HashToDoc[hash] = the_document; //The document is added and associated with its hash
     }
 
+
     //Validate : add the address of the validator (peer reviewer)
     //Who calls ? -> A reviewer
     function Validation(string memory inputHash) public  {
